@@ -1,0 +1,1 @@
+this is the folder where your React application will be allocated.
