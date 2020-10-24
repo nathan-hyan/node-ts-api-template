@@ -4,12 +4,12 @@
 This REST API template is configured to be used with TypeScript and ES6.
 
 ## Baked-in features
-TypeScript support
-ES6 support
-MongoDB support
-Built-in register / login system
-Works with create-react-app frontend app (Under a "frontend" folder)
 
+ - TypeScript support 
+ - ES6 support 
+ - MongoDB support 
+ - Built-in register / login system 
+ - Works with create-react-app frontend app (Under a "frontend" folder)
 
 ## Working routes
 **User register**
@@ -22,7 +22,7 @@ Route: `POST - /api/user/login`
 
 Body: `{email: String; password: String}`
 
-## Installing it
+## Installing the API
 
  1. Clone the repository
  2. `npm i`
@@ -31,6 +31,12 @@ Body: `{email: String; password: String}`
 	- `MONGO_URI=your_mongodb_uri_here`
 	- `PORT=your_port_of_choice`
     - `TOKEN=your_jwt_token_secret`
+
+## Installing the front-end app
+1. Locate in the root folder of this app
+2. Type `npx create-react-app frontend`
+3. Open the `package.json` file of the frontend app
+4. Add the line `"proxy":  "http://localhost:8000"` after Scripts
 
 ## Running the app
 You have two options available.
