@@ -1,4 +1,6 @@
 import cors from "cors";
+
+// DotEnv File Config
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,7 +9,6 @@ import path from "path";
 import "./middleware/database";
 import authRoute from "./routes/auth";
 
-// DotEnv File Config
 
 // Express
 const app: Application = express();
