@@ -3,13 +3,15 @@ import User from "../models/user";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 import verify from "../middleware/verifyUser";
+import { nextTick } from "process";
+import createError from "../middleware/createError";
 const authRoute = router.Router();
 
-authRoute.post("/register", async (req, res) => {
+authRoute.post("/register", async (req, res, next) => {
   let { name, email, password } = req.body;
 
   if (await checkIfEmailAlreadyExist(email)) {
-    res.status(500).send({ success: false, message: "E-mail already exist" });
+    createError(next, "Email already exists");
   } else {
     const user = new User({
       name,
@@ -21,15 +23,12 @@ authRoute.post("/register", async (req, res) => {
       await user.save();
       res.send({ success: true, message: "User created" });
     } catch (error) {
-      res.status(500).send({
-        success: false,
-        message: `Error: ${error.message}`,
-      });
+      next(error);
     }
   }
 });
 
-authRoute.post(`/login`, verify, async (req, res) => {
+authRoute.post(`/login`, verify, async (req, res, next) => {
   let { email, password } = req.body;
 
   if (
@@ -38,9 +37,7 @@ authRoute.post(`/login`, verify, async (req, res) => {
   ) {
     res.header("auth", await createToken(email)).send({ success: true });
   } else {
-    res
-      .status(401)
-      .send({ success: false, message: "Email or password incorrect" });
+    createError(next, "Incorrect email or password", 401);
   }
 });
 
