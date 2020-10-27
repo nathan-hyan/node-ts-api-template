@@ -1,4 +1,5 @@
 import cors from "cors";
+import morgan from "morgan";
 
 // DotEnv File Config
 import dotenv from "dotenv";
@@ -9,11 +10,11 @@ import path from "path";
 import "./middleware/database";
 import authRoute from "./routes/auth";
 
-
 // Express
 const app: Application = express();
 app.use(json());
 app.use(cors());
+app.use(morgan("common"));
 
 // Heroku deploy
 if (process.env.NODE_ENV === "production") {
