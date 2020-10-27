@@ -7,7 +7,7 @@ if (connection !== "no") {
     connection,
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => {
-      console.log(`Connected to ${connection}`);
+      console.log(`Connected to Database`);
     }
   );
 } else {
